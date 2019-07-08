@@ -1,0 +1,39 @@
+.article {
+    position: relative;
+    background-color: lightgrey;
+    border: 1px grey solid;
+    border-radius: 2px;
+    margin-bottom: 5px;
+    box-shadow: 2px 2px;
+    width: 100%;
+}
+
+.article-row {
+    position: relative;
+    width: 100%;
+}
+
+.article-summary {
+    margin-bottom: 25px;
+}
+
+.save-article {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    box-shadow: 1px 1px grey;
+}
+
+.remove-article {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    box-shadow: 1px 1px grey;
+}
+
+.view-notes {
+    position: absolute;
+    right: 5px;
+    bottom: 50px;
+    box-shadow: 1px 1px grey;
+}

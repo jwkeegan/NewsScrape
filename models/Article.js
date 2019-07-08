@@ -16,10 +16,16 @@ var ArticleSchema = new Schema({
     type: String,
     required: true
   },
-  // `summary` is required and of type String
+  // `summary` is not required and of type String
   summary: {
     type: String,
-    required: true
+    required: false
+  },
+  // `saved` is not required, type boolean, and defaults to false
+  saved: {
+    type: Boolean,
+    default: false,
+    required: false
   },
   // `note` is an object that stores a Note id
   // The ref property links the ObjectId to the Note model
