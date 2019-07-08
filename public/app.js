@@ -79,8 +79,39 @@ $(document).on("click", "#saved-articles", function () {
 
 // View Notes
 $(document).on("click", ".view-notes", function() {
-    
-})
+    $(".article-notes").empty();
+    let id = $(this).attr("data-id");
+    $notes = $(".article-notes").attr("data-id", id);
+    $.ajax({
+        method: "GET",
+        url: "/articles/" + id
+    }).then(function(data) {
+        $notes.append("<input id='titleinput' name='title' >");
+        $notes.append("<textarea id='bodyinput' name='body'></textarea>");
+        $notes.append("<button data-id='" + data._id + "' id='savenote' class='btn btn-primary'>Save Note</button>");
+        if (data.note) {
+            $("#titleinput").val(data.note.title);
+            $("#bodyinput").val(data.note.body);
+        }
+    });
+});
+
+// Save a note
+$(document).on("click", "#savenote", function() {
+    let thisId = $(this).attr("data-id");
+    $.ajax({
+        method: "POST",
+        url: "/articles/" + thisId,
+        data: {
+            title: $("#titleinput").val(),
+            body: $("#bodyinput").val()
+        }
+    })
+    .then(function(data) {
+        console.log(data);
+        $(".article-notes").empty();
+    });
+});
 
 // function to fill the page with json data from database
 function fillPage(articles, savedOnly) {
@@ -114,6 +145,9 @@ function fillPage(articles, savedOnly) {
             articleDiv.append(articleRow);
             
             $("#articles").append($("<div class='row'>").append(articleDiv));
+            if (savedOnly) {
+                $("#articles").append("<div class='article-notes row' data-id='" + articles[i]._id + "'>");
+            }
         }
     }
 }
